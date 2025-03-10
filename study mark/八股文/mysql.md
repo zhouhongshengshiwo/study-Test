@@ -92,3 +92,6 @@ DiffCopyInsert
 示例：
 
 SELECT * FROM students;
+
+# 9.显示所有数据库（Show Databases）
+

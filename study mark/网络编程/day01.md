@@ -119,7 +119,10 @@ server::server(boost::asio::io_context& io_context, unsigned short port):_ioc(io
 
 void server::start_accept()
 {		
-	Session* session = new Session(_ioc);
+	Session* session = new Session(_ioc);//此时会话内部的socket对象是空的（未被连接）
+//相当于为即将到来的连接预先分配了一个"空壳"
+
+//将新创建的"空socket"注册到操作系统的TCP监听队列中,告诉操作系统："当有新的客户端连接到达时，请将这个连接绑定到该socket上"
 	_acceptor.async_accept(session->Socket(), std::bind(&server::handaccept, this, session, std::placeholders::_2));
 	
 }
